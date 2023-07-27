@@ -1,0 +1,18 @@
+from gpiozero import OutputDevice
+from time import sleep
+
+motor_pin=17
+
+def run_motor(duration):
+    motor=OutputDevice(motor_pin)
+    motor.on()
+    sleep(duration)
+    motor.off()
+
+try:
+    duration=5
+    run_motor(duration)
+except KeyboardInterrupt:
+    pass
+
+#Vcc=1, GND=9, IN=11
