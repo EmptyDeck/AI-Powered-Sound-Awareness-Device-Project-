@@ -1,5 +1,12 @@
 #ignore all wav, zip files
+
+#Sound files
 *.wav
+#Data files
 *.zip
+#AI model files
 *.pth
-*.csv
+#CSV files
+#*.csv
+#numpy files
+*.npy
