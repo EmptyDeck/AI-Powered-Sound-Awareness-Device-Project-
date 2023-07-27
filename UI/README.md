@@ -17,3 +17,4 @@ ex) pyuic5 -x /home/pi/code/untitled.ui -o /home/pi/code/untitled.py
 
 -----------------------------------------------------------------------------
 
+deginer로 만든 ui파일을 py파일로 바꾸고 vs code에서 ipynb파일형식으로 파일을 하나 만든 뒤에 py파일에 있는 내용을 복사해서 붙여넣는다 (커널 pyqt가 설치된 커널에서 작동된다)
