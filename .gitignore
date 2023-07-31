@@ -13,3 +13,4 @@
 UI/._README.md
 #mp3 files
 *.mp3
+*.DS_Store
