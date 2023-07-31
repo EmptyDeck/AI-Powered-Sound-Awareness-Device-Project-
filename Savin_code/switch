@@ -1,0 +1,25 @@
+import RPi.GPIO as GPIO
+import time
+
+red_pin=17
+yellow_pin=27
+green_pin=22
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(red_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(yellow_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(green_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+try:
+    while True:
+        if not GPIO.input(red_pin):
+            print("빨간 버튼을 눌렀습니다!")
+        if not GPIO.input(yellow_pin):
+            print("노란 버튼을 눌렀습니다!")
+        if not GPIO.input(green_pin):
+            print("초록 버튼을 눌렀습니다!")
+        time.sleep(0.2)
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+#Borad상 핀번호로 따졌을 때, red=11, yellow=13, green=15번 핀에 스위치를 연결합니다.
