@@ -1,0 +1,87 @@
+import RPi.GPIO as GPIO
+import time
+
+red_button_pin = 17
+yellow_button_pin = 22
+green_button_pin = 27
+vibration_motor_pin = 18 #pwm 핀에 연결
+
+vibration_intensity = 0
+
+prev_red_button_state = GPIO.HIGH
+prev_yellow_button_state = GPIO.HIGH
+prev_green_button_state = GPIO.HIGH
+
+debounce_time = 0.2
+
+vibration_on = False
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(red_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(yellow_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(green_button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(vibration_motor_pin, GPIO.OUT)
+
+pwm_frequency = 1000
+pwm = GPIO.PWM(vibration_motor_pin, pwm_frequency)
+pwm.start(vibration_intensity)
+
+def display_vibration_intensity():
+    print(f"진동 세기: {vibration_intensity}")
+
+def adjust_vibration_intensity(button_pin):
+    global vibration_intensity
+
+    if button_pin == red_button_pin:
+        vibration_intensity = 100
+    elif button_pin == yellow_button_pin:
+        vibration_intensity = max(vibration_intensity - 10, 0)
+    elif button_pin == green_button_pin:
+        vibration_intensity = min(vibration_intensity + 10, 100)
+
+    pwm.ChangeDutyCycle(vibration_intensity)
+    display_vibration_intensity()
+
+try:
+    while True:
+        red_button_state = GPIO.input(red_button_pin)
+        yellow_button_state = GPIO.input(yellow_button_pin)
+        green_button_state = GPIO.input(green_button_pin)
+
+        if red_button_state != prev_red_button_state:
+            time.sleep(debounce_time)
+            if red_button_state != GPIO.input(red_button_pin):
+                
+                if not vibration_on:
+                    vibration_on = True
+                    adjust_vibration_intensity(red_button_pin)
+                else:
+                    vibration_intensity = 0
+                    pwm.ChangeDutyCycle(vibration_intensity)
+                    display_vibration_intensity()
+                    vibration_on = False
+
+            prev_red_button_state = red_button_state
+
+        if yellow_button_state != prev_yellow_button_state:
+            time.sleep(debounce_time)
+            if yellow_button_state != GPIO.input(yellow_button_pin):
+                adjust_vibration_intensity(yellow_button_pin)
+            prev_yellow_button_state = yellow_button_state
+
+        if green_button_state != prev_green_button_state:
+            time.sleep(debounce_time)
+            if green_button_state != GPIO.input(green_button_pin):
+                adjust_vibration_intensity(green_button_pin)
+            prev_green_button_state = green_button_state
+
+        time.sleep(0.01)  
+
+except KeyboardInterrupt:
+    pwm.stop()
+    GPIO.cleanup()
+
+#pwm을 이용하여 스위치 입력에 따른 진동모터의 세기를 조절하는 코드입니다.
+#스위치는 적색, 황색, 녹색의 삼색 스위치입니다.
+#적색 스위치는 진동 on/off, 황색 스위치는 진동 세기 낮춤, 녹색 스위치는 진동 세기를 올리는 기능을 합니다.
+#본 핀번호는 board상 번호가 아닌 GPIO 번호입니다.
