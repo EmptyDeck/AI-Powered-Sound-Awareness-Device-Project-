@@ -160,7 +160,7 @@ class SoundAnalysis(QThread):
             count = count + 1
 
 
-iimport os
+import os
 from PyQt5 import QtWidgets, QtCore, QtGui
 import webbrowser
 
