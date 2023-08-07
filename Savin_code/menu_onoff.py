@@ -160,7 +160,7 @@ class SoundAnalysis(QThread):
             count = count + 1
 
 
-import os
+iimport os
 from PyQt5 import QtWidgets, QtCore, QtGui
 import webbrowser
 
@@ -179,7 +179,8 @@ class EnglishTranscriptionWidget(QtWidgets.QWidget):
         self.setLayout(layout)
 
     def open_notebook(self):
-        notebook_filename = "SPT_eng_spinx.ipynb"
+        current_path = os.path.dirname(os.path.abspath(__file__))
+        notebook_filename = os.path.join(current_path, "SPT_eng_spinx.ipynb")
         webbrowser.open(notebook_filename)
 
 
@@ -284,6 +285,4 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
-    widget = EnglishTranscriptionWidget()
-    widget.show()
     sys.exit(app.exec_())
