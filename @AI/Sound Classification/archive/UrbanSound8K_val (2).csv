@@ -1,0 +1,8 @@
+slice_file_name,fsID,start,end,salience,fold,classID,class
+dog_val_segment261349.wav,123456,0,2,1,val,3,dog_bark
+glass_shatter_val_segment191279.wav,123456,0,2,1,val,10,glass_shatter
+glass_shatter_val_segment284150.wav,123456,0,2,1,val,10,glass_shatter
+glass_shatter_val_segment72659.wav,123456,0,2,1,val,10,glass_shatter
+siren_val_segment158163.wav,123456,0,2,1,val,8,siren
+siren_val_segment263101.wav,123456,0,2,1,val,8,siren
+siren_val_segment63641.wav,123456,0,2,1,val,8,siren
