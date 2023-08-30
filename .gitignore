@@ -5,7 +5,7 @@
 #Data files
 *.zip
 #AI model files
-*.pth
+*.
 #CSV files
 #*.csv
 #numpy files
@@ -15,3 +15,4 @@ UI/._README.md
 *.mp3
 #Mac os Desktop Services 
 *.DS_Store
+._*
