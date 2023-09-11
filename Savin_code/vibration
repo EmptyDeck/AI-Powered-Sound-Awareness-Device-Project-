@@ -1,7 +1,7 @@
 from gpiozero import OutputDevice
 from time import sleep
 
-motor_pin=17
+motor_pin=18
 
 def run_motor(duration):
     motor=OutputDevice(motor_pin)
